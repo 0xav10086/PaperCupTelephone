@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Visualizer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #000;
+            font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .instructions {
+            position: relative;
+            z-index: 10;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        .status {
+            font-size: 1em;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .status.connected {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+        .status.playing {
+            background: rgba(33, 150, 243, 0.3);
+            color: #2196F3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="visualizer"></canvas>
+        <div class="instructions">
+            <h1>Audio Visualizer</h1>
+            <p>点击任意位置开始音频流</p>
+            <div id="status" class="status">等待连接...</div>
+        </div>
+    </div>
+    <script src="/audio-visualizer.js"></script>
+</body>
+</html>

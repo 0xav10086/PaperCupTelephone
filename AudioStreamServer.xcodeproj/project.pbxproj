@@ -1,0 +1,562 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		82EAA3312EB126AB00FCC1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82EAA31A2EB126A800FCC1E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82EAA3212EB126A800FCC1E4;
+			remoteInfo = AudioStreamServer;
+		};
+		82EAA33B2EB126AB00FCC1E4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 82EAA31A2EB126A800FCC1E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82EAA3212EB126A800FCC1E4;
+			remoteInfo = AudioStreamServer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		82EAA3222EB126A800FCC1E4 /* AudioStreamServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioStreamServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		82EAA3302EB126AB00FCC1E4 /* AudioStreamServerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioStreamServerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		82EAA33A2EB126AB00FCC1E4 /* AudioStreamServerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioStreamServerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		82EAA3242EB126A800FCC1E4 /* AudioStreamServer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AudioStreamServer;
+			sourceTree = "<group>";
+		};
+		82EAA3332EB126AB00FCC1E4 /* AudioStreamServerTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AudioStreamServerTests;
+			sourceTree = "<group>";
+		};
+		82EAA33D2EB126AB00FCC1E4 /* AudioStreamServerUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AudioStreamServerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		82EAA31F2EB126A800FCC1E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA32D2EB126AB00FCC1E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA3372EB126AB00FCC1E4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		82EAA3192EB126A800FCC1E4 = {
+			isa = PBXGroup;
+			children = (
+				82EAA3242EB126A800FCC1E4 /* AudioStreamServer */,
+				82EAA3332EB126AB00FCC1E4 /* AudioStreamServerTests */,
+				82EAA33D2EB126AB00FCC1E4 /* AudioStreamServerUITests */,
+				82EAA3232EB126A800FCC1E4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		82EAA3232EB126A800FCC1E4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				82EAA3222EB126A800FCC1E4 /* AudioStreamServer.app */,
+				82EAA3302EB126AB00FCC1E4 /* AudioStreamServerTests.xctest */,
+				82EAA33A2EB126AB00FCC1E4 /* AudioStreamServerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82EAA3212EB126A800FCC1E4 /* AudioStreamServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82EAA3442EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServer" */;
+			buildPhases = (
+				82EAA31E2EB126A800FCC1E4 /* Sources */,
+				82EAA31F2EB126A800FCC1E4 /* Frameworks */,
+				82EAA3202EB126A800FCC1E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				82EAA3242EB126A800FCC1E4 /* AudioStreamServer */,
+			);
+			name = AudioStreamServer;
+			packageProductDependencies = (
+			);
+			productName = AudioStreamServer;
+			productReference = 82EAA3222EB126A800FCC1E4 /* AudioStreamServer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		82EAA32F2EB126AB00FCC1E4 /* AudioStreamServerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82EAA3472EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServerTests" */;
+			buildPhases = (
+				82EAA32C2EB126AB00FCC1E4 /* Sources */,
+				82EAA32D2EB126AB00FCC1E4 /* Frameworks */,
+				82EAA32E2EB126AB00FCC1E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				82EAA3322EB126AB00FCC1E4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				82EAA3332EB126AB00FCC1E4 /* AudioStreamServerTests */,
+			);
+			name = AudioStreamServerTests;
+			packageProductDependencies = (
+			);
+			productName = AudioStreamServerTests;
+			productReference = 82EAA3302EB126AB00FCC1E4 /* AudioStreamServerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		82EAA3392EB126AB00FCC1E4 /* AudioStreamServerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82EAA34A2EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServerUITests" */;
+			buildPhases = (
+				82EAA3362EB126AB00FCC1E4 /* Sources */,
+				82EAA3372EB126AB00FCC1E4 /* Frameworks */,
+				82EAA3382EB126AB00FCC1E4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				82EAA33C2EB126AB00FCC1E4 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				82EAA33D2EB126AB00FCC1E4 /* AudioStreamServerUITests */,
+			);
+			name = AudioStreamServerUITests;
+			packageProductDependencies = (
+			);
+			productName = AudioStreamServerUITests;
+			productReference = 82EAA33A2EB126AB00FCC1E4 /* AudioStreamServerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		82EAA31A2EB126A800FCC1E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					82EAA3212EB126A800FCC1E4 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					82EAA32F2EB126AB00FCC1E4 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 82EAA3212EB126A800FCC1E4;
+					};
+					82EAA3392EB126AB00FCC1E4 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 82EAA3212EB126A800FCC1E4;
+					};
+				};
+			};
+			buildConfigurationList = 82EAA31D2EB126A800FCC1E4 /* Build configuration list for PBXProject "AudioStreamServer" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 82EAA3192EB126A800FCC1E4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 82EAA3232EB126A800FCC1E4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82EAA3212EB126A800FCC1E4 /* AudioStreamServer */,
+				82EAA32F2EB126AB00FCC1E4 /* AudioStreamServerTests */,
+				82EAA3392EB126AB00FCC1E4 /* AudioStreamServerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		82EAA3202EB126A800FCC1E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA32E2EB126AB00FCC1E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA3382EB126AB00FCC1E4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		82EAA31E2EB126A800FCC1E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA32C2EB126AB00FCC1E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		82EAA3362EB126AB00FCC1E4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		82EAA3322EB126AB00FCC1E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82EAA3212EB126A800FCC1E4 /* AudioStreamServer */;
+			targetProxy = 82EAA3312EB126AB00FCC1E4 /* PBXContainerItemProxy */;
+		};
+		82EAA33C2EB126AB00FCC1E4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82EAA3212EB126A800FCC1E4 /* AudioStreamServer */;
+			targetProxy = 82EAA33B2EB126AB00FCC1E4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		82EAA3422EB126AB00FCC1E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		82EAA3432EB126AB00FCC1E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		82EAA3452EB126AB00FCC1E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AudioStreamServer/AudioStreamServer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AudioStreamServer/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "您的 App 需要访问麦克风来捕获系统音频流。";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		82EAA3462EB126AB00FCC1E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AudioStreamServer/AudioStreamServer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AudioStreamServer/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "您的 App 需要访问麦克风来捕获系统音频流。";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		82EAA3482EB126AB00FCC1E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioStreamServer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AudioStreamServer";
+			};
+			name = Debug;
+		};
+		82EAA3492EB126AB00FCC1E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioStreamServer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AudioStreamServer";
+			};
+			name = Release;
+		};
+		82EAA34B2EB126AB00FCC1E4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AudioStreamServer;
+			};
+			name = Debug;
+		};
+		82EAA34C2EB126AB00FCC1E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q982GL8X4S;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.0xav10086.audiostream.AudioStreamServerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AudioStreamServer;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		82EAA31D2EB126A800FCC1E4 /* Build configuration list for PBXProject "AudioStreamServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82EAA3422EB126AB00FCC1E4 /* Debug */,
+				82EAA3432EB126AB00FCC1E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82EAA3442EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82EAA3452EB126AB00FCC1E4 /* Debug */,
+				82EAA3462EB126AB00FCC1E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82EAA3472EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82EAA3482EB126AB00FCC1E4 /* Debug */,
+				82EAA3492EB126AB00FCC1E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82EAA34A2EB126AB00FCC1E4 /* Build configuration list for PBXNativeTarget "AudioStreamServerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				82EAA34B2EB126AB00FCC1E4 /* Debug */,
+				82EAA34C2EB126AB00FCC1E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 82EAA31A2EB126A800FCC1E4 /* Project object */;
+}

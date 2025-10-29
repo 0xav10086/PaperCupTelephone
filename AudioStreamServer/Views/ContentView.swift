@@ -1,0 +1,598 @@
+// ContentView.swift
+import SwiftUI
+import AVFoundation
+import Combine
+
+struct ContentView: View {
+    @StateObject private var audioCaptureService = AudioCaptureService()
+    @StateObject private var webSocketServer = WebSocketServer()
+    @StateObject private var httpServer = HTTPServer()
+    
+    // 服务器状态
+    @State private var serverStatus: ServerStatus = .stopped
+    @State private var serverURL: String = ""
+    
+    // 音频状态
+    @State private var audioLevel: Double = 0.0
+    @State private var isAudioCapturing = false
+    @State private var audioFormat: String = "未配置"
+    
+    // 错误处理
+    @State private var errorMessage: String?
+    @State private var showingError = false
+    
+    // 服务统计
+    @State private var uptime: TimeInterval = 0
+    @State private var totalBytesSent: Int64 = 0
+    @State private var startTime: Date?
+    
+    // 音频播放器
+    @State private var audioPlayer: AVAudioPlayer?
+    @State private var isPlayingTestAudio = false
+    
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            // 标题区域
+            headerView
+            
+            // 服务器状态区域
+            serverStatusView
+            
+            // 音频状态区域
+            audioStatusView
+            
+            // 客户端连接区域
+            clientConnectionView
+            
+            // 控制按钮区域
+            controlButtonsView
+            
+            Spacer()
+            
+            // 统计信息
+            statsView
+            
+            // 服务器URL显示
+            serverURLView
+        }
+        .padding()
+        .frame(minWidth: 500, minHeight: 600)
+        .alert("错误", isPresented: $showingError) {
+            Button("确定", role: .cancel) { }
+        } message: {
+            Text(errorMessage ?? "未知错误")
+        }
+        .onAppear {
+            setupServices()
+            setupTestAudio()
+        }
+        .onReceive(timer) { _ in
+            updateStats()
+        }
+    }
+    
+    // MARK: - 视图组件
+    
+    private var headerView: some View {
+        VStack {
+            Text("🎧 纸杯电话")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+            Text("网络音频流媒体服务器")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    private var serverStatusView: some View {
+        HStack {
+            StatusIndicatorView(status: serverStatus)
+            VStack(alignment: .leading) {
+                Text(serverStatus.displayName)
+                    .font(.headline)
+                Text(serverStatus.description)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            Spacer()
+            if serverStatus == .running {
+                Text("运行时间: \(formatUptime(uptime))")
+                    .font(.caption)
+                    .monospacedDigit()
+            }
+        }
+        .padding()
+        .background(Color.secondary.opacity(0.1))
+        .cornerRadius(12)
+    }
+    
+    private var audioStatusView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("音频捕获")
+                        .font(.headline)
+                    Text(audioFormat)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Image(systemName: isAudioCapturing ? "waveform.circle.fill" : "waveform.circle")
+                    .foregroundColor(isAudioCapturing ? .green : .gray)
+                    .font(.title2)
+            }
+            
+            AudioLevelView(level: audioLevel)
+                .frame(height: 30)
+            
+            if isAudioCapturing {
+                Text("正在从 BlackHole 捕获系统音频")
+                    .font(.caption)
+                    .foregroundColor(.green)
+            }
+            
+            // 添加测试音频按钮
+            HStack {
+                Button(action: playTestAudio) {
+                    Label("测试音频", systemImage: "play.circle")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .tint(.blue)
+                .disabled(!isAudioCapturing || isPlayingTestAudio)
+                
+                if isPlayingTestAudio {
+                    Button(action: stopTestAudio) {
+                        Label("停止测试", systemImage: "stop.circle")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.red)
+                }
+            }
+            
+            if isPlayingTestAudio {
+                Text("正在播放测试音频 - iPad 应该能听到音乐")
+                    .font(.caption)
+                    .foregroundColor(.blue)
+            }
+        }
+        .padding()
+        .background(Color.secondary.opacity(0.1))
+        .cornerRadius(12)
+    }
+    
+    private var clientConnectionView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("客户端连接")
+                .font(.headline)
+                .padding(.bottom, 4)
+            
+            if webSocketServer.connectedClients.isEmpty {
+                Text("等待 iPad 设备连接...")
+                    .foregroundColor(.secondary)
+                    .italic()
+            } else {
+                ForEach(webSocketServer.connectedClients) { client in
+                    ClientRowView(client: client)
+                }
+            }
+        }
+        .padding()
+        .background(Color.gray.opacity(0.1))
+        .cornerRadius(8)
+    }
+    
+    private var controlButtonsView: some View {
+        HStack(spacing: 16) {
+            Button(action: startServer) {
+                Label("启动服务器", systemImage: "play.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.green)
+            .disabled(serverStatus == .running)
+            
+            Button(action: stopServer) {
+                Label("停止服务器", systemImage: "stop.fill")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .tint(.red)
+            .disabled(serverStatus == .stopped)
+            
+            Button(action: restartServices) {
+                Label("重启", systemImage: "arrow.clockwise")
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
+            .tint(.blue)
+            .disabled(serverStatus == .stopped)
+        }
+    }
+    
+    private var statsView: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("统计信息")
+                    .font(.headline)
+                Text("发送数据: \(formatBytes(totalBytesSent))")
+                    .font(.caption)
+                Text("音频缓冲: \(audioCaptureService.bufferStatus)")
+                    .font(.caption)
+            }
+            Spacer()
+        }
+        .padding(.horizontal, 5)
+    }
+    
+    private var serverURLView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("iPad 访问地址:")
+                .font(.headline)
+            
+            if serverURL.isEmpty {
+                Text("服务器未启动")
+                    .foregroundColor(.secondary)
+            } else {
+                HStack {
+                    Text(serverURL)
+                        .font(.system(.body, design: .monospaced))
+                        .textSelection(.enabled)
+                    
+                    Spacer()
+                    
+                    Button(action: copyServerURL) {
+                        Image(systemName: "doc.on.doc")
+                    }
+                    .buttonStyle(.borderless)
+                }
+                .padding()
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(8)
+                
+                Text("在 iPad Safari 浏览器中打开此地址")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    // MARK: - 操作方法
+    
+    private func setupServices() {
+        setupServiceObservers()
+        webSocketServer.setAudioCaptureService(audioCaptureService)
+    }
+    
+    private func setupServiceObservers() {
+        // 使用独立的 cancellables 集合
+        var cancellables = Set<AnyCancellable>()
+        
+        httpServer.$isRunning
+            .receive(on: DispatchQueue.main)
+            .sink { isRunning in
+                self.serverStatus = isRunning ? .running : .stopped
+                if isRunning {
+                    self.startTime = Date()
+                } else {
+                    self.startTime = nil
+                    self.uptime = 0
+                }
+            }
+            .store(in: &cancellables)
+        
+        httpServer.$serverURL
+            .receive(on: DispatchQueue.main)
+            .sink { url in
+                self.serverURL = url
+            }
+            .store(in: &cancellables)
+
+        httpServer.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                if let error = error {
+                    self.handleServiceError("HTTP服务器: \(error)")
+                }
+            }
+            .store(in: &cancellables)
+        
+        webSocketServer.$connectedClients
+            .receive(on: DispatchQueue.main)
+            .sink { clients in
+                // 这里我们不需要做任何事，因为视图会直接使用 webSocketServer.connectedClients
+            }
+            .store(in: &cancellables)
+
+        webSocketServer.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                if let error = error {
+                    self.handleServiceError("WebSocket服务器: \(error)")
+                }
+            }
+            .store(in: &cancellables)
+        
+        audioCaptureService.$isCapturing
+            .receive(on: DispatchQueue.main)
+            .sink { isCapturing in
+                self.isAudioCapturing = isCapturing
+            }
+            .store(in: &cancellables)
+        
+        audioCaptureService.$audioFormat
+            .receive(on: DispatchQueue.main)
+            .sink { format in
+                self.audioFormat = format
+            }
+            .store(in: &cancellables)
+        
+        audioCaptureService.$audioLevel
+            .receive(on: DispatchQueue.main)
+            .sink { level in
+                self.audioLevel = level
+            }
+            .store(in: &cancellables)
+        
+        audioCaptureService.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                if let error = error {
+                    self.handleServiceError("音频捕获: \(error)")
+                }
+            }
+            .store(in: &cancellables)
+        
+        // 统计信息更新
+        webSocketServer.$totalBytesSent
+            .receive(on: DispatchQueue.main)
+            .sink { bytes in
+                self.totalBytesSent = bytes
+            }
+            .store(in: &cancellables)
+        
+        // 保存 cancellables
+        self.cancellables = cancellables
+    }
+    
+    private func startServer() {
+        do {
+            // 按顺序启动服务
+            try audioCaptureService.startCapture()
+            try webSocketServer.start()
+            try httpServer.start()
+            
+            serverStatus = .running
+            startTime = Date()
+            print("🎧 音频流媒体服务器已启动")
+            
+        } catch {
+            handleServiceError("启动服务器失败: \(error.localizedDescription)")
+        }
+    }
+
+    private func stopServer() {
+        httpServer.stop()
+        webSocketServer.stop()
+        audioCaptureService.stopCapture()
+        
+        serverStatus = .stopped
+        isAudioCapturing = false
+        startTime = nil
+        uptime = 0
+        
+        print("🛑 服务器已停止")
+    }
+    
+    private func restartServices() {
+        stopServer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            startServer()
+        }
+    }
+    
+    private func copyServerURL() {
+        #if os(macOS)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(serverURL, forType: .string)
+        #endif
+    }
+    
+    private func updateStats() {
+        if let startTime = startTime {
+            uptime = Date().timeIntervalSince(startTime)
+        }
+    }
+    
+    private func handleServiceError(_ error: String) {
+        errorMessage = error
+        showingError = true
+        print("❌ 服务错误: \(error)")
+    }
+    
+    // MARK: - 测试音频功能
+    
+    private func setupTestAudio() {
+        // 确保音频文件在项目中，并且添加到 Copy Bundle Resources 中
+        guard let audioURL = Bundle.main.url(forResource: "平行四界Quadimension - 404 Not Found", withExtension: "mp3") else {
+            print("❌ 找不到测试音频文件")
+            return
+        }
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+            audioPlayer?.prepareToPlay()
+            print("✅ 测试音频加载成功")
+        } catch {
+            print("❌ 加载测试音频失败: \(error)")
+        }
+    }
+    
+    private func playTestAudio() {
+        guard let player = audioPlayer else {
+            print("❌ 音频播放器未初始化")
+            return
+        }
+        
+        isPlayingTestAudio = true
+        player.play()
+        print("🎵 开始播放测试音频")
+        
+        // 10秒后自动停止
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            if self.isPlayingTestAudio {
+                self.stopTestAudio()
+            }
+        }
+    }
+    
+    private func stopTestAudio() {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = 0
+        isPlayingTestAudio = false
+        print("⏹️ 停止测试音频")
+    }
+    
+    // MARK: - 格式化工具
+    
+    private func formatUptime(_ interval: TimeInterval) -> String {
+        let hours = Int(interval) / 3600
+        let minutes = Int(interval) / 60 % 60
+        let seconds = Int(interval) % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+    }
+    
+    private func formatBytes(_ bytes: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB]
+        formatter.countStyle = .binary
+        return formatter.string(fromByteCount: bytes)
+    }
+    
+    // MARK: - 存储属性
+    
+    @State private var cancellables = Set<AnyCancellable>()
+}
+
+// MARK: - 辅助视图
+
+struct StatusIndicatorView: View {
+    let status: ServerStatus
+    
+    var body: some View {
+        Circle()
+            .fill(status.color)
+            .frame(width: 12, height: 12)
+            .overlay(
+                Circle()
+                    .stroke(Color.primary, lineWidth: 1)
+            )
+    }
+}
+
+struct AudioLevelView: View {
+    let level: Double
+    
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                // 背景
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .cornerRadius(6)
+                
+                // 音频电平
+                Rectangle()
+                    .fill(level > 0.8 ? .red : level > 0.5 ? .yellow : .green)
+                    .frame(width: geometry.size.width * CGFloat(level))
+                    .cornerRadius(6)
+                
+                // 刻度
+                HStack(spacing: 0) {
+                    ForEach(0..<10) { _ in
+                        Rectangle()
+                            .fill(Color.white.opacity(0.3))
+                            .frame(width: 1)
+                        Spacer()
+                    }
+                }
+            }
+        }
+        .frame(height: 20)
+    }
+}
+
+struct ClientRowView: View {
+    let client: WebSocketServer.ClientInfo
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "ipad.gen2")
+                .foregroundColor(.blue)
+            
+            VStack(alignment: .leading) {
+                Text(client.deviceInfo)
+                    .font(.subheadline)
+                Text("连接时间: \(client.connectTime, style: .time)")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            Text("\(formatBytes(client.bytesReceived))")
+                .font(.caption)
+                .monospacedDigit()
+                .foregroundColor(.secondary)
+        }
+        .padding(8)
+        .background(Color.blue.opacity(0.1))
+        .cornerRadius(8)
+    }
+    
+    private func formatBytes(_ bytes: Int64) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.allowedUnits = [.useKB, .useMB]
+        formatter.countStyle = .binary
+        return formatter.string(fromByteCount: bytes)
+    }
+}
+
+// MARK: - 服务器状态枚举
+
+enum ServerStatus: Equatable {
+    case stopped
+    case running
+    case error(String)
+    
+    var displayName: String {
+        switch self {
+        case .stopped: return "服务器已停止"
+        case .running: return "服务器运行中"
+        case .error: return "服务器错误"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .stopped: return "点击启动按钮开始服务"
+        case .running: return "正在等待 iPad 连接"
+        case .error(let message): return message
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .stopped: return .gray
+        case .running: return .green
+        case .error: return .red
+        }
+    }
+}
+
+#Preview {
+    ContentView()
+}
